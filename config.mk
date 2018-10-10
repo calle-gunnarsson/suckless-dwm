@@ -1,7 +1,7 @@
 # dwm version
 VERSION = 6.1
 
-OS = $(uname -s)
+OS = $(shell uname -s)
 
 # Customize below to fit your system
 
@@ -9,8 +9,13 @@ OS = $(uname -s)
 PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
 
+ifeq ($(OS), Darwin)
+X11INC = /opt/X11/include
+X11LIB = /opt/X11/lib
+else
 X11INC = /usr/X11R6/include
 X11LIB = /usr/X11R6/lib
+endif
 
 # Xinerama, comment if you don't want it
 XINERAMALIBS  = -lXinerama
@@ -21,7 +26,7 @@ FREETYPELIBS = -lfontconfig -lXft
 ifeq ($(OS), Linux)
 FREETYPEINC = /usr/include/freetype2
 else
-	# Assume OpenBSD 
+# Assume OpenBSD
 FREETYPEINC = ${X11INC}/freetype2
 endif
 
